@@ -4,6 +4,7 @@ import dev.dubhe.anvilcraft.AnvilCraft;
 import dev.dubhe.anvilcraft.api.event.entity.PlayerEvent;
 import dev.dubhe.anvilcraft.api.recipe.AnvilRecipeManager;
 import dev.dubhe.anvilcraft.network.ClientRecipeManagerSyncPack;
+import dev.dubhe.anvilcraft.util.RecipeCaches;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.MinecraftServer;
@@ -39,5 +40,6 @@ public class PlayerEventListener {
             ServerGamePacketListenerImpl handler, MinecraftServer server
     ) {
         new ClientRecipeManagerSyncPack(AnvilRecipeManager.getAnvilRecipeList()).send(handler.player);
+        RecipeCaches.INSTANCE.syncToPlayer(handler.player);
     }
 }

@@ -27,5 +27,6 @@ public class RecipesHandler {
         MobTransformRecipesLoader.init(provider);
         BulgingLikeRecipesLoader.init(provider);
         MultiblockCraftingHandler.init(provider);
+        JewelCraftingRecipesLoader.init(provider);
     }
 }

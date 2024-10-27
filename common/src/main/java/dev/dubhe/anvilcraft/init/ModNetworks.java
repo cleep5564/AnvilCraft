@@ -5,6 +5,7 @@ import dev.dubhe.anvilcraft.AnvilCraft;
 import dev.dubhe.anvilcraft.network.ClientRecipeManagerSyncPack;
 import dev.dubhe.anvilcraft.network.ClientboundIncomingChargePacket;
 import dev.dubhe.anvilcraft.network.ClientboundMutedSoundSyncPacket;
+import dev.dubhe.anvilcraft.network.ClientboundSyncRecipeCachePacket;
 import dev.dubhe.anvilcraft.network.ClientboundUpdateDisplayItemPacket;
 import dev.dubhe.anvilcraft.network.HammerUsePack;
 import dev.dubhe.anvilcraft.network.HeliostatsIrradiationPack;
@@ -108,6 +109,12 @@ public class ModNetworks {
         AnvilCraft.of("client_incoming_charge"),
         ClientboundIncomingChargePacket.class,
         ClientboundIncomingChargePacket::new
+    );
+
+    public static final ResourceLocation CLIENT_SYNC_RECIPE_CACHE = Network.register(
+        AnvilCraft.of("sync_recipe_cache"),
+        ClientboundSyncRecipeCachePacket.class,
+        ClientboundSyncRecipeCachePacket::new
     );
 
     public static void register() {
