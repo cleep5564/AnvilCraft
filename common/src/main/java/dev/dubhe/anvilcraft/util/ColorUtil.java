@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
 /**
  * 颜色相关
  *
@@ -11,40 +12,48 @@ import org.jetbrains.annotations.NotNull;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ColorUtil {
+    /**
+     * rgb转hsv
+     */
     @Contract("_, _, _ -> new")
     public static float @NotNull [] rgbToHsv(int r, int g, int b) {
-        float rNorm = r / 255.0f;
-        float gNorm = g / 255.0f;
-        float bNorm = b / 255.0f;
+        float redNorm = r / 255.0f;
+        float greenNorm = g / 255.0f;
+        float blueNorm = b / 255.0f;
 
-        float cMax = Math.max(rNorm, Math.max(gNorm, bNorm));
-        float cMin = Math.min(rNorm, Math.min(gNorm, bNorm));
-        float delta = cMax - cMin;
+        float normMax = Math.max(redNorm, Math.max(greenNorm, blueNorm));
+        float normMin = Math.min(redNorm, Math.min(greenNorm, blueNorm));
+        float delta = normMax - normMin;
 
         float h;
         if (delta == 0) {
             // HSV undefined
             h = 0;
-        } else if (cMax == rNorm) {
-            h = 60 * (((gNorm - bNorm) / delta) % 6);
-        } else if (cMax == gNorm) {
-            h = 60 * (((bNorm - rNorm) / delta) + 2);
+        } else if (normMax == redNorm) {
+            h = 60 * (((greenNorm - blueNorm) / delta) % 6);
+        } else if (normMax == greenNorm) {
+            h = 60 * (((blueNorm - redNorm) / delta) + 2);
         } else {
-            h = 60 * (((rNorm - gNorm) / delta) + 4);
+            h = 60 * (((redNorm - greenNorm) / delta) + 4);
         }
 
-        float s = (cMax == 0) ? 0 : (delta / cMax);
+        float s = (normMax == 0) ? 0 : (delta / normMax);
 
-        return new float[]{h, s * 100, cMax * 100};
+        return new float[]{h, s * 100, normMax * 100};
     }
 
+    /**
+     * hsv转rgb
+     */
     @Contract("_, _, _ -> new")
     public static int @NotNull [] hsvToRgb(float h, float s, float v) {
         float c = v / 100 * s / 100;
         float x = c * (1 - Math.abs(((h / 60) % 2) - 1));
         float m = v / 100 - c;
 
-        float r, g, b;
+        float r;
+        float g;
+        float b;
 
         if (h >= 0 && h < 60) {
             r = c;

@@ -2,11 +2,18 @@ package dev.dubhe.anvilcraft.block;
 
 
 import dev.dubhe.anvilcraft.api.hammer.IHammerRemovable;
+import dev.dubhe.anvilcraft.init.ModMenuTypes;
+import dev.dubhe.anvilcraft.inventory.JewelCraftingMenu;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -24,6 +31,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class JewelCraftingTable extends Block implements IHammerRemovable {
     public static final VoxelShape SHAPE = Shapes.or(
         Block.box(0, 0, 0, 3, 2, 3),
@@ -71,8 +82,9 @@ public class JewelCraftingTable extends Block implements IHammerRemovable {
         @NotNull InteractionHand hand,
         @NotNull BlockHitResult hit
     ) {
-        return super.use(state, level, pos, player, hand, hit);
-        // TODO: GUI
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
+        ModMenuTypes.open((ServerPlayer) player, getMenuProvider(state, level, pos));
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
@@ -80,5 +92,18 @@ public class JewelCraftingTable extends Block implements IHammerRemovable {
         @NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context
     ) {
         return SHAPE;
+    }
+
+    @Override
+    public @Nullable MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+        return new SimpleMenuProvider(
+            (id, inventory, player) -> new JewelCraftingMenu(
+                ModMenuTypes.JEWEL_CRAFTING.get(),
+                id,
+                inventory,
+                ContainerLevelAccess.create(level, pos)
+            ),
+            getName()
+        );
     }
 }

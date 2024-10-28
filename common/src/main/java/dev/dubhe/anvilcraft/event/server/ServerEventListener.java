@@ -7,6 +7,7 @@ import dev.dubhe.anvilcraft.api.hammer.HammerManager;
 import dev.dubhe.anvilcraft.api.recipe.AnvilRecipeManager;
 import dev.dubhe.anvilcraft.api.world.load.LevelLoadManager;
 import dev.dubhe.anvilcraft.init.ModHammerInits;
+import dev.dubhe.anvilcraft.util.RecipeCaches;
 import org.jetbrains.annotations.NotNull;
 
 public class ServerEventListener {
@@ -21,6 +22,7 @@ public class ServerEventListener {
         ModHammerInits.init();
         HammerManager.register();
         AnvilRecipeManager.updateRecipes(event.getServer().getRecipeManager(), event.getServer().registryAccess());
+        RecipeCaches.INSTANCE.reload(event.getServer().getRecipeManager());
         LevelLoadManager.notifyServerStarted();
     }
 
