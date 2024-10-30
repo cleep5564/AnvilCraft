@@ -17,5 +17,8 @@ public class ItemBlockRenderTypesMixin {
     private static void registerRenderTypes(HashMap<Block, RenderType> map, CallbackInfo ci) {
         map.put(ModBlocks.SPECTRAL_ANVIL.get(), RenderType.translucent());
         map.put(ModBlocks.TRANSPARENT_CRAFTING_TABLE.get(), RenderType.translucent());
+        map.put(ModBlocks.HEAVY_IRON_WALL.get(), RenderType.cutout());
+        map.put(ModBlocks.HEAVY_IRON_DOOR.get(), RenderType.cutout());
+        map.put(ModBlocks.HEAVY_IRON_TRAPDOOR.get(), RenderType.cutout());
     }
 }

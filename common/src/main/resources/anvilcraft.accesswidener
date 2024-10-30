@@ -38,3 +38,5 @@ accessible field net/minecraft/client/gui/screens/inventory/AbstractContainerScr
 accessible field net/minecraft/client/gui/screens/inventory/AbstractContainerScreen isSplittingStack Z
 accessible field net/minecraft/client/gui/screens/inventory/AbstractContainerScreen quickCraftingType I
 accessible method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen recalculateQuickCraftRemaining ()V
+
+accessible method net/minecraft/world/level/block/DoorBlock getHinge (Lnet/minecraft/world/item/context/BlockPlaceContext;)Lnet/minecraft/world/level/block/state/properties/DoorHingeSide;
