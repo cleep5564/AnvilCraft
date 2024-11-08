@@ -235,6 +235,9 @@ public class ModItemGroups {
                 entries.accept(ModBlocks.HEAVY_IRON_PLATE.asStack());
                 entries.accept(ModBlocks.HEAVY_IRON_COLUMN.asStack());
                 entries.accept(ModBlocks.HEAVY_IRON_BEAM.asStack());
+                entries.accept(ModBlocks.HEAVY_IRON_WALL.asStack());
+                entries.accept(ModBlocks.HEAVY_IRON_DOOR.asStack());
+                entries.accept(ModBlocks.HEAVY_IRON_TRAPDOOR.asStack());
                 entries.accept(ModBlocks.DEEPSLATE_ZINC_ORE.asStack());
                 entries.accept(ModBlocks.DEEPSLATE_TIN_ORE.asStack());
                 entries.accept(ModBlocks.DEEPSLATE_TITANIUM_ORE.asStack());
