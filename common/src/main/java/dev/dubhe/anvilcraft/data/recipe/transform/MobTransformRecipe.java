@@ -105,7 +105,10 @@ public class MobTransformRecipe implements Recipe<MobTransformContainer> {
      * 对生物进行后处理
      */
     public void postProcess(Entity oldEntity, Entity entity) {
-        for (TransformOptions option : transformOptions) {
+        for (TransformOptions option : transformOptions.stream()
+            .sorted(Comparator.comparingInt(TransformOptions::getPriority).reversed())
+            .toList()
+        ) {
             option.accept(oldEntity, entity);
         }
         CompoundTag compoundTag = entity.saveWithoutId(new CompoundTag());

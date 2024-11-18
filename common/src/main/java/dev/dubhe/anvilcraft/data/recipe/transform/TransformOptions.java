@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import dev.dubhe.anvilcraft.init.ModBlocks;
+import lombok.Getter;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -18,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 public enum TransformOptions implements StringRepresentable {
 
-    KEEP_INVENTORY("keepInventory") {
+    KEEP_INVENTORY("keepInventory", 900) {
         @Override
         public void accept(Entity oldEntity, Entity newEntity) {
             if (newEntity instanceof LivingEntity n && oldEntity instanceof LivingEntity o) {
@@ -31,7 +32,7 @@ public enum TransformOptions implements StringRepresentable {
             }
         }
     },
-    REPLACE_ANVIL("replaceAnvil") {
+    REPLACE_ANVIL("replaceAnvil", 1000) {
         @Override
         public void accept(Entity oldEntity, Entity newEntity) {
             if (newEntity instanceof LivingEntity n && oldEntity instanceof LivingEntity o) {
@@ -63,9 +64,12 @@ public enum TransformOptions implements StringRepresentable {
 
     public static final Codec<TransformOptions> CODEC = StringRepresentable.fromEnum(TransformOptions::values);
     private final String name;
+    @Getter
+    private final int priority;
 
-    TransformOptions(String name) {
+    TransformOptions(String name, int priority) {
         this.name = name;
+        this.priority = priority;
     }
 
     @Override
