@@ -503,5 +503,7 @@
   "tooltip.anvilcraft.item.transmission_pole": "Build a power grid with a transmission distance of 8",
   "tooltip.anvilcraft.jade.power_information": "Power Grid: %d/%d kW",
   "tooltip.anvilcraft.only_jei": "We have detected that you have only installed JEI and will not be able to obtain a complete recipe query. We recommend installing %s for a complete gaming experience!",
-  "tooltip.anvilcraft.ruby_prism.power": "Laser level: %d"
+  "tooltip.anvilcraft.ruby_prism.power": "Laser level: %d",
+  "death.attack.laser": "%1$s was charred by laser",
+  "death.attack.laser.player": "%1$s was charred by laser whilst fighting %2$s"
 }
