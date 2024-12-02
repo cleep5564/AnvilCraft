@@ -65,6 +65,7 @@ subprojects {
     }
 
     dependencies {
+        + datagen "net.minecraftforge:forge:${mc_version}+"
         minecraft "com.mojang:minecraft:${libs.versions.minecraft.get()}"
         // The following line declares the mojmap mappings, you may use other mappings as well
         if (is_root_project) {
